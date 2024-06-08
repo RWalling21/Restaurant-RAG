@@ -81,7 +81,7 @@ Expected JSON output format:
       "phone_number": "000-000-0000",
       "email": "info@example.com",
       "dietary_offerings": ["vegan", "nut-free"],
-      "customer_reviews": ["Great vegan options and friendly staff", "cozy atmosphere with lots of healthy food options"]
+      "customer_reviews": ["Example user review"]
     }
   ]
 }
