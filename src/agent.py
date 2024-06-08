@@ -5,8 +5,8 @@ from langchain_openai import ChatOpenAI
 from typing import TypedDict, Annotated, Any
 import operator
 
-from tools import tools 
-from restaurant import RestaurantJSON
+from src.tools import tools 
+from src.restaurant import RestaurantJSON
 
 from dotenv import load_dotenv
 _ = load_dotenv()
@@ -73,6 +73,25 @@ Follow these guidelines:
 - Once data collection is complete, compile and return the information exclusively in JSON format. Interaction with the user is not required beyond providing the JSON output.
 - Collect enough information to make at least 5 complete JSON objects.
 - All data MUST BE REAL, only include information that has been directly sited from a review site / restaurant website. 
+
+Expected JSON output format:
+```json
+{
+  "restaurants": [
+    {
+      "name": "Example Restaurant",
+      "phone_number": "000-000-0000",
+      "email": "info@example.com",
+      "dietary_options": ["vegan", "nut-free"],
+      "customer_reviews": [
+        {
+            "reviewer": "name",
+            "review": "review text"
+        }
+    ]
+    }
+  ]
+}
 """
 
 model = ChatOpenAI(model="gpt-4o")

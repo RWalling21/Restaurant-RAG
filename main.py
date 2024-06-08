@@ -1,5 +1,5 @@
 from langchain_core.messages import HumanMessage
-from agent import agent
+from src.agent import agent
 from dotenv import load_dotenv
 import json
 
