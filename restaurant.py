@@ -8,6 +8,6 @@ class Review(BaseModel):
 class RestaurantJSON(BaseModel):
     restaurant: str = Field(description="The name of the restaurant")
     phone_number: str = Field(description="The phone number of the restaurant")
-    emails: List[str] = Field(description="The email of the restaurant")
-    dietary_offerings: List[str] = Field(description="The dietary options the restaurant offers")
-    reviews: List[Review] = Field(description="Relevant reviews of the restaurant")
+    email: str = Field(description="The email of the restaurant")
+    dietary_options: List[str] = Field(description="The dietary options the restaurant offers")
+    customer_reviews: List[Review] = Field(description="A review of the restaurant with only the reviewer and the review text")
