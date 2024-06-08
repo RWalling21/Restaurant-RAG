@@ -2,7 +2,6 @@ from langgraph.graph import StateGraph, END
 from langchain_core.messages import AnyMessage, SystemMessage, ToolMessage
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_openai import ChatOpenAI
-from pydantic import Json
 from typing import TypedDict, Annotated, Any
 import operator
 
@@ -13,7 +12,7 @@ _ = load_dotenv()
 
 class AgentState(TypedDict):
     messages: Annotated[list[AnyMessage], operator.add]
-    json_output: Json[Any]
+    json_output: Any
 
 class Agent:
     def __init__(self, model, tools, system=""):
@@ -46,6 +45,7 @@ class Agent:
         return {'messages': [message]}
 
     def parse_output_to_string(self, state: AgentState):
+        # To be clear, when dereferencing state['messages][-1].content we are not only returning the last message, we are returning a list of all messages because of the way that the messages variable is Annotated
         message_content = str(state['messages'][-1].content)
         json_output = JsonOutputParser(pydantic_object=RestaurantJSON).invoke(message_content)
         return {'json_output': json_output}
@@ -54,10 +54,10 @@ class Agent:
         tool_calls = state['messages'][-1].tool_calls
         results = []
         for t in tool_calls:
-            print(f"Calling: {t}")
+            print(f"Calling the {t['name']} with args {t['args']}")
             result = self.tools[t['name']].invoke(t['args'])
             results.append(ToolMessage(tool_call_id=t['id'], name=t['name'], content=str(result)))
-        print("Back to the model!")
+        print("Finished tool cycle")
         return {'messages': results}
 
 prompt = """You are an AI assistant tasked with scraping web data for database use. 
