@@ -12,7 +12,7 @@ _ = load_dotenv()
 
 class AgentState(TypedDict):
     messages: Annotated[list[AnyMessage], operator.add]
-    json_output: Annotated[Dict[str, Any], operator.add]
+    json_output: str
 
 class Agent:
     def __init__(self, model, tools, system=""):
@@ -63,28 +63,14 @@ prompt = """You are an AI assistant tasked with scraping web data for database u
 Your specific duties involve collecting detailed information about restaurants, including their names, phone numbers, emails, dietary options, and customer reviews.
 
 Follow these guidelines: 
-- Utilize the search engine to identify relevant web pages. 
-- Employ the read-tool to extract necessary data from URLs obtained via the search engine. 
+- Utilize the search engine to identify relevant web pages and begin to gather information. 
+- Employ the read-tool to dig deaper and read links mentioned from the seach tool. 
 - Make multiple search and read-tool calls as needed, either concurrently or sequentially. 
 - Initiate searches only when the required information parameters are clearly defined. 
 - If preliminary information is needed for a follow-up query, obtain it before proceeding with further questions. 
 - Once data collection is complete, compile and return the information exclusively in JSON format. Interaction with the user is not required beyond providing the JSON output.
 - Collect enough information to make at least 5 complete JSON objects.
 - All data MUST BE REAL, only include information that has been directly sited from a review site / restaurant website. 
-
-Expected JSON output format: 
-```json
-{
-  "restaurants": [
-    {
-      "name": "Example Restaurant",
-      "phone_number": "000-000-0000",
-      "email": "info@example.com",
-      "dietary_offerings": ["vegan", "nut-free"],
-      "customer_reviews": ["Example user review"]
-    }
-  ]
-}
 """
 
 model = ChatOpenAI(model="gpt-4o")
