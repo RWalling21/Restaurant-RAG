@@ -2,17 +2,18 @@ from langgraph.graph import StateGraph, END
 from langchain_core.messages import AnyMessage, SystemMessage, ToolMessage
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_openai import ChatOpenAI
-from tools import tools, RestaurantJSON
-
-from typing import TypedDict, Annotated, Dict, Any
+from pydantic import Json
+from typing import TypedDict, Annotated, Any
 import operator
+
+from tools import tools, RestaurantJSON
 
 from dotenv import load_dotenv
 _ = load_dotenv()
 
 class AgentState(TypedDict):
     messages: Annotated[list[AnyMessage], operator.add]
-    json_output: str
+    json_output: Json[Any]
 
 class Agent:
     def __init__(self, model, tools, system=""):
@@ -45,8 +46,8 @@ class Agent:
         return {'messages': [message]}
 
     def parse_output_to_string(self, state: AgentState):
-        message = state['messages'][-1]
-        json_output = JsonOutputParser(pydantic_object=RestaurantJSON).invoke(message)
+        message_content = str(state['messages'][-1].content)
+        json_output = JsonOutputParser(pydantic_object=RestaurantJSON).invoke(message_content)
         return {'json_output': json_output}
 
     def take_action(self, state: AgentState):

@@ -11,6 +11,5 @@ if __name__ == "__main__":
 
     result = agent.graph.invoke({"messages": messages})
 
-    json_data = json.loads(result['json_output'][-1])
-    json_string = json.dumps(json_data, indent=2)
+    json_string = json.dumps(result['json_output'], indent=2)
     print(json_string)
