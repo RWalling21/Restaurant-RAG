@@ -5,7 +5,8 @@ from langchain_openai import ChatOpenAI
 from typing import TypedDict, Annotated, Any
 import operator
 
-from tools import tools, RestaurantJSON
+from tools import tools 
+from restaurant import RestaurantJSON
 
 from dotenv import load_dotenv
 _ = load_dotenv()
