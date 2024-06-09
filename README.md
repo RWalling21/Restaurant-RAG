@@ -1,20 +1,25 @@
 # Restaurant Retrieval Augmented Generation
 
-# Install 
+# Install :computer:
 
-To run this application you must have python3 and anaconda installed (https://www.anaconda.com/). 
+Create a .env file in the root of this project, inside place your Open-AI API key
+```env
+OPENAI_API_KEY="YOUR KEY HERE"
+```
 
-To create the environment run the following command 
+To run this application you must have [Python 3](https://www.python.org/downloads/) and [Anaconda](https://www.anaconda.com/download) installed. 
+
+First create an anaconda environment, this environment includes all of the project's dependencies 
 ```shell
 > conda env create -f environment.yml
 ```
 
-To enter the environment run the following command 
+To run the environment run the following command 
 ```shell
 > conda activate restaurant-rag
 ```
 
-Once you've entered the environment you can simply run the main file 
+Once you've entered the environment you're ready to run the main file
 ```shell
 > python main.py
 ```
