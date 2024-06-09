@@ -11,3 +11,4 @@ class RestaurantJSON(BaseModel):
     email: str = Field(description="The email of the restaurant")
     dietary_options: List[str] = Field(description="The dietary options the restaurant offers")
     customer_reviews: List[Review] = Field(description="A review of the restaurant")
+    

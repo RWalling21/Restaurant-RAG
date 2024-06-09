@@ -80,7 +80,7 @@ Expected JSON output format:
     {
       "name": "Example Restaurant",
       "phone_number": "000-000-0000",
-      "email": "info@example.com",
+      "email": "Example Email",
       "dietary_options": ["vegan", "nut-free"],
       "customer_reviews": [
         {
