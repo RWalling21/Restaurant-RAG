@@ -19,5 +19,5 @@ Once you've entered the environment you can simply run the main file
 > python main.py
 ```
 
-You're all set! Enter your query and watch the magic happen. 
+You're all set! Enter your query and watch the :sparkles: magic :sparkles: happen.
 
