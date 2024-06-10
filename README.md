@@ -1,5 +1,4 @@
 # Restaurant Retrieval Augmented Generation
-https://youtu.be/O3rTGeRK8JA
 
 # Install :computer:
 
